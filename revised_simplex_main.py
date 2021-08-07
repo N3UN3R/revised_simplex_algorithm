@@ -34,19 +34,19 @@ def main():
     if numberOfProducers > 0:
 
         # run simplex algorithm
-        interiorPointResults, runtime, timeForDataPrep = run_revisedSimplex_algorithm(household_data, assets,
+        revisedSimplexResults, runtime, timeForDataPrep = run_revisedSimplex_algorithm(household_data, assets,
                                                                                       costMatrix)
 
         # values of simplex_results
         # x values of optimization this equals the traded amounts in between the households
-        tradedAmounts_raw = interiorPointResults.x
+        tradedAmounts_raw = revisedSimplexResults.x
 
 
         # total watthours traded
         totalTradedWatts = sum(tradedAmounts_raw)
 
         # getTotalCosts equals the objective function value
-        totalCosts = interiorPointResults.fun
+        totalCosts = revisedSimplexResults.fun
 
         """ Analysis welche hebel genutzt wurden"""
         activeHouseholds = remove_inactive_consumers_as_possible_consumers(household_data, assets)
